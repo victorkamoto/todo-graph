@@ -1,0 +1,28 @@
+type Query {
+    todos: [todo!]!
+    todo(todo: Utodo): todo!
+}
+
+type Mutation {
+    todo: todoMutations
+}
+
+type todo {
+    id: String,
+    task: String
+    complete: Boolean!
+}
+input Itodo {
+    task: String!,
+    complete: Boolean!
+}
+input Utodo {
+    id: String,
+    task: String
+    complete: Boolean!
+}
+type todoMutations {
+    create(todo: Itodo): todo
+    update(todo: Utodo): todo
+    delete(todo: Itodo): todo
+}
