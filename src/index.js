@@ -4,14 +4,18 @@ const router = require("express").Router()
 import graphqlHTTP from "express-graphql";
 
 
-import { makeExecutableSchema } from "graphql-tools";
-import { importSchema } from "graphql-import";
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { addResolversToSchema } from '@graphql-tools/schema';
 
 
-const typeDefs = importSchema("./schema.graphql");
+const typeDefs = loadSchemaSync("schema.graphql", { loaders: [ new GraphQLFileLoader()]});
 import resolvers from "./graphql"
 
-let schema = makeExecutableSchema({ typeDefs, resolvers });
+let schema = addResolversToSchema({ 
+    schema: typeDefs, 
+    resolvers 
+});
 
 router.use("/graph", (req, res, next) => {
     return graphqlHTTP({

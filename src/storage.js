@@ -2,7 +2,7 @@ import Waterline from "waterline"
 import DiskAdapter from "sails-disk";
 import MongoAdapter from "sails-mongo";
 
-import { todo } from "./graphql/resolvers/Mutation/todo/model";
+import todo from "./graphql/resolvers/Mutation/todo/model";
 
 const { NODE_ENV, DB_URI } = process.env
 
